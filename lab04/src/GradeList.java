@@ -20,11 +20,14 @@ public class GradeList {
     }
 
     public void addGrade(double grade) {
-        this.grades.add(grade);
+        if (grades == null) {
+            grades = new ArrayList<Double>();
+        }
+        grades.add(grade);
     }
 
     public Double averageGrade() {
-        if (grades.size() == 0) {
+        if (grades == null) {
             return null;
         } else {
             int sum = 0;
@@ -36,7 +39,7 @@ public class GradeList {
     }
 
     public Double minGrade() {
-        if (grades.size() == 0) {
+        if (grades == null) {
             return null;
         } else {
             double min = grades.get(0);
@@ -48,7 +51,7 @@ public class GradeList {
     }
 
     public Double maxGrade() {
-        if (grades.size() == 0) {
+        if (grades == null) {
             return null;
         } else {
             double max = grades.get(0);
