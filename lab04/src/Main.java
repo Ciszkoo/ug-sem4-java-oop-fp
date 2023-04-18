@@ -21,6 +21,8 @@ public class Main {
                 default -> System.out.println("You chose invalid option");
             }
         }
+
+        optionScanner.close();
     }
 
     static void printWelcomeMessage() {
@@ -66,7 +68,7 @@ public class Main {
         if (maxGrade == null) {
             printEmpty();
         } else {
-            System.out.printf("The lowest grade: %f\n", maxGrade);
+            System.out.printf("The highest grade: %f\n", maxGrade);
         }
     }
 

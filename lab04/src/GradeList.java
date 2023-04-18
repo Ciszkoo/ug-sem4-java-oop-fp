@@ -21,44 +21,38 @@ public class GradeList {
 
     public void addGrade(double grade) {
         if (grades == null) {
-            grades = new ArrayList<Double>();
+            grades = new ArrayList<>();
         }
         grades.add(grade);
     }
 
     public Double averageGrade() {
-        if (grades == null) {
+        if (grades == null || grades.size() == 0) {
             return null;
-        } else {
-            int sum = 0;
-            for (var grade : grades) {
-                sum += grade;
-            }
-            return (double) sum / (double) grades.size();
         }
+        double sum = 0;
+        for (var grade : grades) {
+            sum += grade;
+        }
+        return sum / grades.size();
+    }
+
+    private Double extremeGrade(ComparisonTrait comparison) {
+        if (grades == null || grades.size() == 0) {
+            return null;
+        }
+        double extremeVal = grades.get(0);
+        for (var grade : grades) {
+            if (comparison.compare(grade, extremeVal)) extremeVal = grade;
+        }
+        return extremeVal;
     }
 
     public Double minGrade() {
-        if (grades == null) {
-            return null;
-        } else {
-            double min = grades.get(0);
-            for (var grade : grades) {
-                if (grade < min) min = grade;
-            }
-            return min;
-        }
+        return extremeGrade((x, y) -> x < y);
     }
 
     public Double maxGrade() {
-        if (grades == null) {
-            return null;
-        } else {
-            double max = grades.get(0);
-            for (var grade : grades) {
-                if (grade > max) max = grade;
-            }
-            return max;
-        }
+        return extremeGrade((x, y) -> x > y);
     }
 }
