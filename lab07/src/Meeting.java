@@ -57,8 +57,3 @@ public class Meeting {
 enum Priority {
     LOW, MEDIUM, HIGH
 }
-
-@FunctionalInterface
-interface MeetingChecker {
-    boolean check(Meeting m);
-}

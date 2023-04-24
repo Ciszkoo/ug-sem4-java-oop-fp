@@ -1,5 +1,6 @@
 import java.time.DayOfWeek;
 import java.util.ArrayList;
+import java.util.function.Predicate;
 
 public class Calendar {
     private ArrayList<ArrayList<Meeting>> meetings;
@@ -32,11 +33,11 @@ public class Calendar {
         return meetings.get(day.getValue() - 1);
     }
 
-    public ArrayList<Meeting> getDailyMeetings(DayOfWeek day, MeetingChecker predicate) {
+    public ArrayList<Meeting> getDailyMeetings(DayOfWeek day, Predicate<Meeting> predicate) {
         ArrayList<Meeting> dailyMeetings = getDailyMeetings(day);
         ArrayList<Meeting> filteredDailyMeetings = new ArrayList<>();
         for (var meeting : dailyMeetings) {
-            if (predicate.check(meeting)) {
+            if (predicate.test(meeting)) {
                 filteredDailyMeetings.add(meeting);
             }
         }
