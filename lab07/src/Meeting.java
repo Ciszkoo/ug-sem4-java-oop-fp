@@ -44,16 +44,20 @@ public class Meeting {
 
     @Override
     public String toString() {
-        String priority = switch (this.priority) {
-            case LOW -> "Niski";
-            case MEDIUM -> "Sredni";
-            case HIGH -> "Duzy";
-        };
-
-        return "Rozpoczecie: " + start + "; Zakonczenie: " + end + "; Priorytet: " + priority + "; Opis: " + description;
+        return "Start: " + start + "; End: " + end + "; Priority: " + priority.getValue() + "; Description: " + description;
     }
 }
 
 enum Priority {
-    LOW, MEDIUM, HIGH
+    LOW("Low"), MEDIUM("Medium"), HIGH("High");
+
+    private final String value;
+
+    Priority(String value) {
+        this.value = value;
+    }
+
+    public String getValue() {
+        return value;
+    }
 }

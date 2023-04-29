@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Program sluzy do planowania spotkan w danym tygodniu");
+        System.out.println("Program allows to plan weekly meetings");
 
         boolean run = true;
         Scanner scanner = new Scanner(System.in);
@@ -20,7 +20,7 @@ public class Main {
                 case 3 -> showDailyMeetings(calendar);
                 case 4 -> showDailyMeetingsFiltered(calendar);
                 case 5 -> run = false;
-                default -> System.out.println("Wybierz poprawna opcje");
+                default -> System.out.println("Choose valid option");
             }
         }
 
@@ -32,9 +32,9 @@ public class Main {
         ArrayList<Meeting> meetings = calendar.getDailyMeetings(day);
         Scanner scanner = new Scanner(System.in);
 
-        printMeetings(meetings, "Brak spotkan w wybranym dniu.");
+        printMeetings(meetings, "There is no meetings scheduled for this day.");
 
-        System.out.println("Podaj numer spotkania ktore chcesz usunac: ");
+        System.out.println("Enter number of meeting you want to delete: ");
         int index = scanner.nextInt();
 
         calendar.removeMeeting(day, index);
@@ -46,7 +46,7 @@ public class Main {
 //        ArrayList<Meeting> meetings = calendar.getDailyMeetings(day, priority);
         ArrayList<Meeting> meetings = calendar.getDailyMeetings(day, m -> m.getPriority() == priority);
 
-        printMeetings(meetings, "Brak spotkan o wybranym priorytecie w wybranym dniu.");
+        printMeetings(meetings, "There is no meetings scheduled for this day with selected priority.");
 
     }
 
@@ -54,7 +54,7 @@ public class Main {
         DayOfWeek day = getDayFromUser();
         ArrayList<Meeting> meetings = calendar.getDailyMeetings(day);
 
-        printMeetings(meetings, "Brak spotkan w wybranym dniu.");
+        printMeetings(meetings, "There is no meetings scheduled for this day.");
     }
 
     public static void printMeetings(ArrayList<Meeting> meetings, String noMeetingsMsg) {
@@ -82,7 +82,7 @@ public class Main {
 
     public static LocalTime getEndFromUser() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Podaj godzine zakonczenia spotkania (format HH MM)");
+        System.out.println("Enter end time for the meeting (HH MM)");
         int hour = scanner.nextInt();
         int minute = scanner.nextInt();
 
@@ -93,12 +93,12 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.println("Podaj godzine rozpoczecia spotkania (format HH MM)");
+            System.out.println("Enter start time of the meeting (HH MM)");
             int hour = scanner.nextInt();
             int minute = scanner.nextInt();
             LocalTime time = LocalTime.of(hour, minute);
             if (time.isBefore(Meeting.MIN_START_TIME)) {
-                System.out.println("Spotkanie musi sie zaczynac najwczesniej o 8:00");
+                System.out.println("Meeting can't start before 8:00 a.m.");
             } else {
                 return time;
             }
@@ -107,7 +107,7 @@ public class Main {
 
     public static String getDescriptionFromUser() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Podaj opis spotkania:");
+        System.out.println("Enter description:");
 
         return scanner.nextLine();
     }
@@ -116,8 +116,8 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.println("Wybierz priorytet spotkania:");
-            System.out.printf("[1] Niski%n[2] Sredni%n[3] Wysoki%n");
+            System.out.println("Choose priority of the meeting:");
+            System.out.printf("[1] Low%n[2] Medium%n[3] High%n");
             int choice = scanner.nextInt();
             switch (choice) {
                 case 1 -> {
@@ -138,8 +138,8 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.println("Wybierz dzien:");
-            System.out.printf("[1] Poniedzialek%n[2] Wtorek%n[3] Sroda%n[4] Czwartek%n[5] Piatek%n[6] Sobota%n[7] Niedziela%n");
+            System.out.println("Choose day:");
+            System.out.printf("[1] Monday%n[2] Tuesday%n[3] Wednesday%n[4] Thursday%n[5] Friday%n[6] Saturday%n[7] Sunday%n");
             int choice  = scanner.nextInt();
 
             switch (choice) {
@@ -169,11 +169,11 @@ public class Main {
     }
 
     public static void printMenu() {
-        System.out.println("[1] Dodaj spotkanie");
-        System.out.println("[2] Usun spotkanie");
-        System.out.println("[3] Wyswietl spotkania z danego dnia");
-        System.out.println("[4] Wyswietl spotkania z danego dnia o konkretnym priorytecie");
-        System.out.println("[5] Zakoncz dzialanie programu");
+        System.out.println("[1] Add meeting");
+        System.out.println("[2] Delete meeting");
+        System.out.println("[3] Show meetings for a specified day");
+        System.out.println("[4] Show meetings for a specified day with selected priority");
+        System.out.println("[5] Close the program");
     }
 
 
